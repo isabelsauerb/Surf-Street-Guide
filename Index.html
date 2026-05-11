@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to My Neighborhood</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #2A7B6F;
+      --teal-light: #e6f4f1;
+      --teal-mid: #4a9d8f;
+      --orange: #C8552A;
+      --cream: #FAF7F2;
+      --ink: #1e1e1e;
+      --gray: #6b6b6b;
+      --rule: #d4e8e4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--teal);
+      color: white;
+      text-align: center;
+      padding: 56px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(0,0,0,0.12) 0%, transparent 50%);
+    }
+
+    header .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    header .address {
+      font-size: 14px;
+      opacity: 0.75;
+      letter-spacing: 0.05em;
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    header .tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 17px;
+      opacity: 0.9;
+      position: relative;
+      color: #c8e8e2;
+    }
+
+    /* ── INTRO NOTE ── */
+    .intro-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .intro {
+      background: white;
+      border-left: 4px solid var(--teal);
+      margin: 40px 0 12px;
+      padding: 24px 28px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 16px rgba(42,123,111,0.07);
+    }
+
+    /* ── MAIN GRID ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 8px 24px 64px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .section:nth-child(1)  { animation-delay: 0.05s; }
+    .section:nth-child(2)  { animation-delay: 0.10s; }
+    .section:nth-child(3)  { animation-delay: 0.15s; }
+    .section:nth-child(4)  { animation-delay: 0.20s; }
+    .section:nth-child(5)  { animation-delay: 0.25s; }
+    .section:nth-child(6)  { animation-delay: 0.30s; }
+    .section:nth-child(7)  { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--rule);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-header .emoji {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── PLACE CARDS (2-col grid) ── */
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .place {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 18px;
+      border: 1px solid #e8eeec;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .place:hover {
+      box-shadow: 0 4px 20px rgba(42,123,111,0.12);
+      transform: translateY(-2px);
+    }
+
+    .place-name {
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .place-detail {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ── BULLET LIST (getting around) ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: '→';
+      color: var(--teal);
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px 56px;
+      border-top: 1px solid var(--rule);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--teal);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    footer small {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    @media (max-width: 500px) {
+      .places-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="eyebrow">Lincoln Park · Chicago</p>
+    <h1>Welcome to My Neighborhood</h1>
+    <p class="address">526 West Surf Street</p>
+    <p class="tagline">A little guide made with love for your visit 🏙️</p>
+  </header>
+
+  <div class="intro-wrap">
+    <div class="intro">
+      Hey Mom &amp; friend! So excited for you to spend the weekend here. This little guide has everything you need — my favorite spots, easy walks, and a few classic Chicago things you shouldn't miss. The neighborhood is super walkable, so don't be afraid to just wander. Enjoy every bite! 🥰
+    </div>
+  </div>
+
+  <main>
+
+    <!-- FOOD -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🍔</span>
+        <h2>Food &amp; Eats</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">Flub a Dub Chub</div>
+          <div class="place-detail">Hot dogs &amp; burgers, quick takeout</div>
+        </div>
+        <div class="place">
+          <div class="place-name">The Wiener Circle</div>
+          <div class="place-detail">Hot dogs — employees are krass and fun</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Shawarma &amp; Grill</div>
+          <div class="place-detail">Middle Eastern, quick takeout</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWEET TREATS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🍦</span>
+        <h2>Sweet Treats</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">Brothers Creamery</div>
+          <div class="place-detail">Ice cream</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Oberweis</div>
+          <div class="place-detail">A little further of a walk</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COFFEE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">☕</span>
+        <h2>Coffee</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">Hero Coffee Bar</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Fancy Plants Café</div>
+          <div class="place-detail">So good</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Lucky Cat Coffee</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WALKS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🚶</span>
+        <h2>Places to Walk</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">Surf Street to the Lake</div>
+          <div class="place-detail">Walk straight down Surf</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Diversey Driving Range &amp; Harbour</div>
+          <div class="place-detail">Most nights the bar &amp; restaurant is open with outdoor seating, sometimes events</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Lincoln Park Zoo</div>
+          <div class="place-detail">~20 min walk</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Lincoln Park Farmers Market</div>
+          <div class="place-detail">Saturdays, across from the zoo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOPPING -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🛍️</span>
+        <h2>Shopping &amp; Boutiques</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">Inkling Shop</div>
+          <div class="place-detail">Cute little store within walking distance</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Four Sided</div>
+          <div class="place-detail">Cute little store within walking distance</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GETTING AROUND -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🚌</span>
+        <h2>Getting Around</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>CTA Red Line: Diversey or Fullerton stops</li>
+        <li>Divvy Bikes: Bike-share stations throughout the neighborhood</li>
+        <li>Rideshare: Uber &amp; Lyft</li>
+      </ul>
+    </div>
+
+    <!-- TOTAL CHICAGO -->
+    <div class="section">
+      <div class="section-header">
+        <span class="emoji">🏙️</span>
+        <h2>Total Chicago — Must-Dos</h2>
+      </div>
+      <div class="places-grid">
+        <div class="place">
+          <div class="place-name">The Chicago Bean</div>
+          <div class="place-detail">Millennium Park</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Art Institute of Chicago</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Deep Dish Pizza</div>
+        </div>
+        <div class="place">
+          <div class="place-name">Cindy's Rooftop</div>
+          <div class="place-detail">Chicago Athletic Association, 12 S Michigan Ave</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Have the best weekend — I'm so happy you're here! 💚</p>
+    <small>Questions? Just text me ✉️</small>
+  </footer>
+
+</body>
+</html>
